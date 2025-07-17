@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+:root {
+    --root-bg: hsl(210 30% 85%);
+    --header-bg: hsl(210 30% 80%);
+    --footer-bg: hsl(210 30% 80%);
+    --theme-btn-bg: hsl(210 30% 70%);
+    --drop-bg: hsl(0 0% 25%);
+    --drop-bg-hover: hsl(0 0% 30%);
+    --slider-bg: hsl(210 30% 40%);
+    --text-main: hsl(210 20% 10%);
+    --text-white: hsl(0 0% 90%);
+    --calc-main-bg: hsl(0 0% 25%);
+    --calc-display-bg: hsl(0 0% 35%);
+    --calc-text: hsl(0 0% 95%);
+    --calc-scrollbar-thumb-bg: hsl(0 0% 55%);
+    --calc-key-bg-1: hsl(0 0% 35%);
+    --calc-key-bg-2: hsl(0 0% 45%);
+    --calc-key-bg-3: hsl(35 100% 50%);
+    --calc-key-bg-1-hover: hsl(0 0% 40%);
+    --calc-key-bg-2-hover: hsl(0 0% 50%);
+    --calc-key-bg-3-hover: hsl(35 100% 55%);
+    --calc-key-bg-1-active: hsl(0 0% 45%);
+    --calc-key-bg-2-active: hsl(0 0% 55%);
+    --calc-key-bg-3-active: hsl(35 100% 60%);
+    --calc-top-menu-btn-bg: hsl(0 0% 32%);
+    --calc-top-menu-btn-hover-bg: hsl(0 0% 35%);
+}
+
+[data-theme="dark"] {
+    --root-bg: hsl(210 25% 27%);
+    --header-bg: hsl(210 25% 23%);
+    --footer-bg: hsl(210 25% 23%);
+    --text-main: hsl(0 0% 90%);
+    --theme-btn-bg: hsl(210 30% 40%);
+    --slider-bg: hsl(210 30% 70%);
+}
+
+[data-theme="dark"] .theme-btn label::before {
+    transform: translateX(155%);
+}
+
+@keyframes jiggle {
+    0%      {transform: rotate(0deg);}
+    25%     {transform: rotate(10deg);}
+    75%     {transform: rotate(-10deg);}
+    100%    {transform: rotate(0deg);}
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 1800px;
+    min-width: 450px;
+    min-height: 100vh;
+    margin: auto;
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-main-color);
+    background-color: var(--root-bg);
+}
+
+#root * {
+    overflow: hidden;
+}
+
+#root, header, footer, .theme-btn label{
+    transition: background-color .4s ease;
+}
+
+a, a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: var(--text-main);
+    background-color: var(--header-bg);
+}
+
+.logo a{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.logo a:hover i{
+    animation: jiggle .5s ease 1;
+}
+
+.logo i {
+    font-size: 2rem;
+}
+
+.theme-btn {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.theme-btn label{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 3rem;
+    height: 1.5rem;
+    border-radius: .75rem;
+    background-color: var(--theme-btn-bg);
+}
+
+.theme-btn label:hover {
+    cursor: pointer;
+}
+
+.theme-btn label::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 1.1rem;
+    height: 1.1rem;
+    transform: translateX(20%);
+    border-radius: inherit;
+    background-color: var(--slider-bg);
+    transition: background-color, transform .3s ease;
+}
+
+.theme-btn label input {
+    display: none;
+}
+
+/* Main */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0rem;
+}
+
+
+#calculator {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    min-width: 250px;
+    max-width: 400px;
+    border-radius: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--calc-main-bg);
+}
+
+[data-theme="dark"] #calculator {
+    box-shadow: 4px 4px 10px hsl(210 30% 35%);
+}
+
+#top-menu {
+    display: flex;
+    padding: .5rem 1rem;
+    justify-content: center;
+}
+
+#top-menu button {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    padding: .5rem;
+    border: none;
+    border-radius: .3rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text-white);
+    background-color: var(--calc-top-menu-btn-bg);
+}
+
+#top-menu button:hover {
+    cursor: pointer;
+    background-color: var(--calc-top-menu-btn-hover-bg);
+}
+
+#top-menu i {
+    font-size: .6rem;
+}
+
+#drop-down {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    border-radius: .5rem;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px hsl(0 0% 15%);
+    color: var(--text-white);
+    background-color: var(--drop-bg);
+    transition: display .3s ease;
+}
+
+#drop-down label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    padding: .5rem;
+    border-bottom: 1px solid hsl(0 0% 15%);
+    font-size: .9rem;
+    font-family: inherit;
+}
+
+#drop-down label:hover {
+    background-color: var(--drop-bg-hover);
+    cursor: pointer;
+}
+
+#drop-down label:last-child {
+    border-bottom: none;
+}
+
+#drop-down label input {
+    display: none;
+}
+
+#drop-down label .custom-radio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: .5rem;
+    border: 2px solid hsl(0 0% 50%);
+    background-color: inherit;
+}
+
+#drop-down label .custom-radio::before {
+    content: "";
+    display: none;
+    width: .5rem;
+    height: .5rem;
+    border-radius: .8rem;
+    background-color: hsl(0 0% 50%);
+}
+
+#drop-down[data-mode="Basic"] label[value="Basic"] .custom-radio::before {
+    display: block;
+}
+
+#drop-down[data-mode="Advanced"] label[value="Advanced"] .custom-radio::before {
+    display: block;
+}
+
+#display {
+    resize: none;
+    white-space: nowrap;
+    overflow: auto hidden;
+    width: 100%;
+    border: none;
+    padding: .5rem;
+    font-family: inherit;
+    font-size: 2rem;
+    text-align: right;
+    color: var(--calc-text);
+    background-color: var(--calc-display-bg);
+}
+
+#display::-webkit-scrollbar {
+    height: .5rem;
+    border-radius: .25rem;
+    background-color: inherit;
+}
+
+#display::-webkit-scrollbar-thumb {
+    border-radius: .25rem;
+    background-color: var(--calc-scrollbar-thumb-bg);
+}
+
+#display:focus {
+    outline: none;
+}
+
+#keys {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .3rem;
+    padding: 1rem .5rem .5rem .5rem;
+}
+
+.calc-btn {
+    border: none;
+    border-radius: .5rem;
+    padding: .5rem 0rem;
+    font-size: 1.2rem;
+    color: var(--calc-text);
+    background-color: var(--calc-key-bg-1);
+    font-family: inherit;
+}
+
+.calc-btn:hover {
+    background-color: var(--calc-key-bg-1-hover);
+}
+
+.calc-btn:active {
+    background-color: var(--calc-key-bg-1-active);
+}
+
+.calc-btn-number {
+    background-color: var(--calc-key-bg-2);
+    font-weight: bold;
+}
+
+.calc-btn-number:hover {
+    background-color: var(--calc-key-bg-2-hover);
+}
+
+.calc-btn-number:active {
+    background-color: var(--calc-key-bg-2-active);
+}
+
+.calc-btn-submit {
+    grid-row: span 2;
+    background-color: var(--calc-key-bg-3);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.calc-btn-submit:hover {
+    background-color: var(--calc-key-bg-3-hover);
+}
+
+.calc-btn-submit:active {
+    background-color: var(--calc-key-bg-3-active);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    color: var(--text-main);
+    background-color: var(--footer-bg);
+}
+
+footer a:hover span{
+    text-decoration: underline;
+}
