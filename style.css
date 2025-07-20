@@ -12,8 +12,11 @@
     --text-main: hsl(210 20% 10%);
     --text-white: hsl(0 0% 90%);
     --calc-main-bg: hsl(0 0% 25%);
-    --calc-display-bg: hsl(0 0% 35%);
+    --calc-history-bg: hsl(0 0% 35%);
+    --calc-history-hover-bg: hsl(0 0% 40%);
+    --calc-display-bg: hsl(0 0% 30%);
     --calc-text: hsl(0 0% 95%);
+    --calc-history-text: hsl(0 0% 70%);
     --calc-scrollbar-thumb-bg: hsl(0 0% 55%);
     --calc-key-bg-1: hsl(0 0% 35%);
     --calc-key-bg-2: hsl(0 0% 45%);
@@ -39,6 +42,7 @@
 
 [data-theme="dark"] .theme-btn label::before {
     transform: translateX(155%);
+    box-shadow: 1px 1px 4px black;
 }
 
 @keyframes jiggle {
@@ -62,7 +66,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     max-width: 1800px;
-    min-width: 450px;
+    min-width: 400px;
     min-height: 100vh;
     margin: auto;
     font-family: 'Nunito', sans-serif;
@@ -136,6 +140,7 @@ header {
     border-radius: inherit;
     background-color: var(--slider-bg);
     transition: background-color, transform .3s ease;
+    box-shadow: -1px 1px 4px hsl(0 0% 10%);
 }
 
 .theme-btn label input {
@@ -259,6 +264,49 @@ main {
     display: block;
 }
 
+#history {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: end;
+    font-size: 1rem;
+    height: 6rem;
+    background-color: var(--calc-history-bg);
+    overflow: hidden auto;
+}
+
+#history div {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: .5rem;
+    color: var(--calc-history-text);
+    border-bottom: 1px solid hsl(0 0 20%);
+}
+
+#history div:hover {
+    background-color: var(--calc-history-hover-bg);
+}
+
+#history span {
+    overflow: hidden;
+}
+
+#history div .expression {
+    justify-self: left;
+}
+
+#history div .equal-sign {
+    justify-self: center;
+}
+
+#history div .result {
+    justify-self: right;
+}
+
+#history div:first-child {
+    border: none;
+}
+
 #display {
     resize: none;
     white-space: nowrap;
@@ -271,15 +319,17 @@ main {
     text-align: right;
     color: var(--calc-text);
     background-color: var(--calc-display-bg);
+    border-top: 1px solid hsl(0 0% 20%);
 }
 
-#display::-webkit-scrollbar {
+#display::-webkit-scrollbar, #history::-webkit-scrollbar {
     height: .5rem;
+    width: .3rem;
     border-radius: .25rem;
     background-color: inherit;
 }
 
-#display::-webkit-scrollbar-thumb {
+#display::-webkit-scrollbar-thumb, #history::-webkit-scrollbar-thumb {
     border-radius: .25rem;
     background-color: var(--calc-scrollbar-thumb-bg);
 }
@@ -339,6 +389,10 @@ main {
 
 .calc-btn-submit:active {
     background-color: var(--calc-key-bg-3-active);
+}
+
+.calc-btn-square::before {
+    content: 'x'
 }
 
 /* Footer */
